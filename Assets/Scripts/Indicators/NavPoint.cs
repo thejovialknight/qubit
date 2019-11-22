@@ -8,14 +8,15 @@ public class NavPoint : MonoBehaviour
     public Vector3 offset;
 
     public NavMeshAgent agent;
+    public Animator animator;
 
-    private void OnEnable()
+    void OnEnable()
     {
         EventManager.onSelectEvent += OnSelect;
         EventManager.onDeselectEvent += OnDeselect;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         EventManager.onSelectEvent -= OnSelect;
         EventManager.onDeselectEvent -= OnDeselect;
@@ -25,7 +26,7 @@ public class NavPoint : MonoBehaviour
     {
         if(GameObject.ReferenceEquals(selection, agent.gameObject))
         {
-            GetComponent<Shrinker>().StartCoroutine("Expand");
+            animator.SetBool("Expanding", true);
         }
     }
 
@@ -33,8 +34,13 @@ public class NavPoint : MonoBehaviour
     {
         if(GameObject.ReferenceEquals(selection, agent.gameObject))
         {
-            GetComponent<Shrinker>().StartCoroutine("Shrink");
+            animator.SetBool("Shrinking", true);
         }
+    }
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -52,7 +58,7 @@ public class NavPoint : MonoBehaviour
 
     public void Destroy()
     {
-        GetComponent<ShrinkAndDestroy>().StartCoroutine("Destroy");
+        animator.SetBool("Destroy", true);
         this.enabled = false;
     }
 }

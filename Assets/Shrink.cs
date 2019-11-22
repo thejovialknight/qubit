@@ -16,6 +16,9 @@ public class Shrink : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetBool("Expanded", false);
+        animator.SetBool("Shrunk", false);
+        animator.SetBool("Expanding", false);
         animator.SetBool("Shrinking", true);
         gameObject = animator.gameObject;
         animationHelper = gameObject.GetComponent<AnimationHelper>();

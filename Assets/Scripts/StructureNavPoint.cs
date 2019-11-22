@@ -25,7 +25,7 @@ public class StructureNavPoint : MonoBehaviour
 
     public void Destroy()
     {
-        GetComponent<ShrinkAndDestroy>().StartCoroutine("Destroy");
+        navPoint.Destroy();
         this.enabled = false;
     }
 }

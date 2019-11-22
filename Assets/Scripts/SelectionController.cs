@@ -13,7 +13,6 @@ public class SelectionController : MonoBehaviour
 
     void Awake()
     {
-        shrinker = GetComponent<Shrinker>();
     }
 
     void Update()

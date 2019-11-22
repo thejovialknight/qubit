@@ -54,7 +54,27 @@ PrefabInstance:
     - target: {fileID: 1649443239445225497, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}
       propertyPath: m_Name
-      value: StructureNavPoint Variant
+      value: InteractNavPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649443239445225490, guid: ece099122e5b7e84281e69a10c101e1b,
+        type: 3}
+      propertyPath: currentSize.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649443239445225490, guid: ece099122e5b7e84281e69a10c101e1b,
+        type: 3}
+      propertyPath: currentSize.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649443239445225490, guid: ece099122e5b7e84281e69a10c101e1b,
+        type: 3}
+      propertyPath: size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649443239445225490, guid: ece099122e5b7e84281e69a10c101e1b,
+        type: 3}
+      propertyPath: size.x
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1649443239445225491, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}

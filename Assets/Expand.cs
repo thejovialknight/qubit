@@ -16,7 +16,10 @@ public class Expand : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetBool("Expanded", false);
+        animator.SetBool("Shrunk", false);
         animator.SetBool("Expanding", true);
+        animator.SetBool("Shrinking", false);
         gameObject = animator.gameObject;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         animationHelper = gameObject.GetComponent<AnimationHelper>();
