@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shrinker : MonoBehaviour
 {
     MeshRenderer meshRenderer;
-    ConstantRotation rotationScript;
+    AnimationHelper rotationScript;
     public Vector3 rotationSpeed;
     public Vector3 scale;
     public Vector3 shrunkRotationSpeed;
@@ -24,12 +24,12 @@ public class Shrinker : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        rotationScript = GetComponent<ConstantRotation>();
+        rotationScript = GetComponent<AnimationHelper>();
 
         if (startsExpanded)
         {
             transform.localScale = scale;
-            rotationScript.rotation = rotationSpeed;
+            //rotationScript.rotation = rotationSpeed;
             isExpanded = true;
             meshRenderer.enabled = true;
             if(immediateChange)
@@ -40,7 +40,7 @@ public class Shrinker : MonoBehaviour
         else
         {
             transform.localScale = Vector3.zero;
-            rotationScript.rotation = shrunkRotationSpeed;
+            //rotationScript.rotation = shrunkRotationSpeed;
             isShrunk = true;
             meshRenderer.enabled = false;
             if (immediateChange)
@@ -57,17 +57,17 @@ public class Shrinker : MonoBehaviour
         meshRenderer.enabled = true;
 
         Vector3 previousScale = transform.localScale;
-        Vector3 previousRotationSpeed = rotationScript.rotation;
+        //Vector3 previousRotationSpeed = rotationScript.rotation;
         while (transform.localScale != scale)
         {
             transform.localScale = Vector3.Lerp(previousScale, scale, expansionTime * Time.deltaTime);
-            rotationScript.rotation = Vector3.Lerp(previousRotationSpeed, rotationSpeed, expansionTime * Time.deltaTime);
+            //rotationScript.rotation = Vector3.Lerp(previousRotationSpeed, rotationSpeed, expansionTime * Time.deltaTime);
             Debug.Log("EXPANDING");
             yield return null;
         }
 
         transform.localScale = scale;
-        rotationScript.rotation = rotationSpeed;
+        //rotationScript.rotation = rotationSpeed;
         Debug.Log("EXPANDED");
         isExpanded = true;
         isShrunk = false;
@@ -82,12 +82,12 @@ public class Shrinker : MonoBehaviour
             float currentShrinkSpeed = shrinkSpeed;
             transform.localScale -= new Vector3(currentShrinkSpeed, currentShrinkSpeed, currentShrinkSpeed) * Time.deltaTime;
             currentShrinkSpeed += scaleAcceleration * Time.deltaTime;
-            rotationScript.speed += rotationAcceleration * Time.deltaTime;
+            //rotationScript.speed += rotationAcceleration * Time.deltaTime;
             yield return null;
         }
 
         transform.localScale = Vector3.zero;
-        rotationScript.rotation = shrunkRotationSpeed;
+        //rotationScript.rotation = shrunkRotationSpeed;
 
         meshRenderer.enabled = false;
         isExpanded = false;
