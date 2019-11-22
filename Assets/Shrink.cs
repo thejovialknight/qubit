@@ -7,6 +7,12 @@ public class Shrink : StateMachineBehaviour
     public float scaleSpeed = 1f;
     public float scaleAcceleration = 10f;
     public float rotationAcceleration = 10f;
+    public bool lockXScale = false;
+    public bool lockYScale = false;
+    public bool lockZScale = false;
+    public bool lockXRotation = false;
+    public bool lockYRotation = false;
+    public bool lockZRotation = false;
 
     float currentScaleSpeed;
 
@@ -28,10 +34,10 @@ public class Shrink : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animationHelper.currentSize.x > 0f || animationHelper.currentSize.y > 0f || animationHelper.currentSize.z > 0f)
+        if (animationHelper.IsTooLarge(Vector3.zero, lockXScale, lockYScale, lockZScale))
         {
-            animationHelper.currentRotationSpeed += new Vector3(rotationAcceleration, rotationAcceleration, rotationAcceleration) * Time.deltaTime;
-            animationHelper.currentSize -= new Vector3(currentScaleSpeed, currentScaleSpeed, currentScaleSpeed) * Time.deltaTime;
+            animationHelper.AccelerateRotationTowards(new Vector3(25f, 25f, 25f), rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
+            animationHelper.ScaleTowards(Vector3.zero, currentScaleSpeed, lockXScale, lockYScale, lockZScale);
             currentScaleSpeed += scaleAcceleration * Time.deltaTime;
         }
         else

@@ -44,12 +44,12 @@ PrefabInstance:
     - target: {fileID: 1649443239445225493, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1649443239445225493, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1649443239445225497, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}
@@ -81,6 +81,11 @@ PrefabInstance:
       propertyPath: offset.y
       value: 0.125
       objectReference: {fileID: 0}
+    - target: {fileID: 1649443239445225491, guid: ece099122e5b7e84281e69a10c101e1b,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 3239221016351489116}
     - target: {fileID: 5610665925183320440, guid: ece099122e5b7e84281e69a10c101e1b,
         type: 3}
       propertyPath: scale.y
@@ -116,3 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f67261cd0afd045b106f8b8ab10950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3239221016351489116 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -3472656103938763016, guid: ece099122e5b7e84281e69a10c101e1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7150207635583625892}
+  m_PrefabAsset: {fileID: 0}

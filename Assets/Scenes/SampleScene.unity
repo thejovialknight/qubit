@@ -996,12 +996,9 @@ GameObject:
   m_Component:
   - component: {fileID: 227790183}
   - component: {fileID: 227790186}
-  - component: {fileID: 227790185}
   - component: {fileID: 227790184}
-  - component: {fileID: 227790187}
-  - component: {fileID: 227790189}
   m_Layer: 0
-  m_Name: Selector
+  m_Name: SelectionController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1028,53 +1025,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227790182}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e4aba6d235de74c821297c62fc92a1, type: 3}
+  m_Script: {fileID: 11500000, guid: dffdaed73ea88204996b9a096a6e5951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  size: 1.5
-  shrinkSize: 0.25
---- !u!23 &227790185
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227790182}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 5918f7dc0f8e11146a2aee6694dbad6e, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  selectorPrefab: {fileID: 2781104367317287193, guid: cfb24ba99534fe94dabc3abf3c62ba83,
+    type: 3}
+  currentSelector: {fileID: 0}
 --- !u!33 &227790186
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1083,36 +1041,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227790182}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &227790187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227790182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dffdaed73ea88204996b9a096a6e5951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectorAnimation: {fileID: 227790184}
-  meshRenderer: {fileID: 227790185}
---- !u!114 &227790189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227790182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc04484713fe484e8ce84f756f2ea96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentRotationSpeed: {x: 0, y: 0, z: 0}
-  currentSize: {x: 1, y: 0.05, z: 1}
-  rotationSpeed: {x: 0, y: 0, z: 0}
-  size: {x: 0, y: 0, z: 0}
 --- !u!1 &262947853
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,26 +5,12 @@ using UnityEngine;
 public class SelectionController : MonoBehaviour
 {
     GameObject selection = null;
-    float yOffset = 0.25f;
 
-    Shrinker shrinker;
-    public SelectorAnimation selectorAnimation;
-    public MeshRenderer meshRenderer;
-
-    void Awake()
-    {
-    }
+    public Transform selectorPrefab;
+    public Selector currentSelector;
 
     void Update()
     {
-        if (shrinker.isExpanded)
-        {
-            selectorAnimation.enabled = true;
-        }
-        else
-        {
-            selectorAnimation.enabled = false;
-        }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -38,29 +24,23 @@ public class SelectionController : MonoBehaviour
 
                 if (hit.collider.CompareTag("Bitbot"))
                 {
-                    yOffset = 0.25f;
-                    selectorAnimation.size = 1.5f;
-                    SelectObject(hit.collider.gameObject);
+                    SelectObject(hit.collider.gameObject, 1.5f, 0.25f);
+
+                    // make bitbot do this when event is fired. In fact, this will allow the selector to be entirely programmatic
                     selection.GetComponent<PlayerNavController>().enabled = true;
                 }
                 else if (hit.collider.CompareTag("Structure"))
                 {
-                    yOffset = 0.125f;
-                    selectorAnimation.size = 5f;
-                    SelectObject(hit.collider.gameObject);
+                    SelectObject(hit.collider.gameObject, 5f, 0.125f);
                 }
             }
         }
-
-        if(selection != null)
-        {
-            transform.position = new Vector3(selection.transform.position.x, yOffset, selection.transform.position.z);
-        }
     }
 
-    void SelectObject(GameObject obj)
+    void SelectObject(GameObject obj, float selectorSize, float yOffset)
     {
-        GetComponent<Shrinker>().StartCoroutine("Expand");
+        currentSelector = GameObject.Instantiate(selectorPrefab).GetComponent<Selector>();
+        currentSelector.Initialize(obj.transform, selectorSize, yOffset);
         selection = obj;
         EventManager.SelectEvent(selection);
     }
@@ -68,7 +48,12 @@ public class SelectionController : MonoBehaviour
     void DeselectObject()
     {
         EventManager.DeselectEvent(selection);
-        shrinker.StartCoroutine("Shrink");
+        if(currentSelector != null) {
+            currentSelector.Destroy();
+            currentSelector = null;
+        }
+
+        // must relegate this elsewhere as well if im honest
         PlayerNavController navController = selection.GetComponent<PlayerNavController>();
         if (navController != null)
         {

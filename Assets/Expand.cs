@@ -7,6 +7,12 @@ public class Expand : StateMachineBehaviour
     public float scaleSpeed = 1f;
     public float scaleAcceleration = 10f;
     public float rotationAcceleration = 10f;
+    public bool lockXScale = false;
+    public bool lockYScale = false;
+    public bool lockZScale = false;
+    public bool lockXRotation = false;
+    public bool lockYRotation = false;
+    public bool lockZRotation = false;
 
     float currentScaleSpeed;
 
@@ -29,18 +35,18 @@ public class Expand : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(animationHelper.IsRotatingTooSlowly())
+        if(animationHelper.IsRotatingTooSlowly(animationHelper.rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
         {
-            animationHelper.AccelerateRotationTowardsTarget(rotationAcceleration);
+            animationHelper.AccelerateRotationTowardsTarget(rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
         }
         else
         {
             animationHelper.currentRotationSpeed = animationHelper.rotationSpeed;
         }
 
-        if(animationHelper.IsTooSmall())
+        if(animationHelper.IsTooSmall(animationHelper.size, lockXScale, lockYScale, lockZScale))
         {
-            animationHelper.ScaleTowardsTarget(currentScaleSpeed);
+            animationHelper.ScaleTowardsTarget(currentScaleSpeed, lockXScale, lockYScale, lockZScale);
             currentScaleSpeed += scaleAcceleration;
         }
         else
@@ -48,7 +54,7 @@ public class Expand : StateMachineBehaviour
             animationHelper.currentSize = animationHelper.size;
         }
 
-        if(!animationHelper.IsTooSmall() && !animationHelper.IsRotatingTooSlowly())
+        if(!animationHelper.IsTooSmall(animationHelper.size, lockXScale, lockYScale, lockZScale) && !animationHelper.IsRotatingTooSlowly(animationHelper.rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
         {
             animator.SetBool("Expanding", false);
             animator.SetBool("Expanded", true);
