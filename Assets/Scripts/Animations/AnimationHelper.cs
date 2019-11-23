@@ -2,223 +2,129 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationHelper : MonoBehaviour
+public static class AnimationHelper
 {
-    public Vector3 currentRotationSpeed;
-    public Vector3 currentSize;
-
-    public Vector3 rotationSpeed;
-    public Vector3 size;
-
-    void Update()
+    public static void ScaleTowards(Transform transform, Vector3 scale, float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
     {
-        transform.localScale = currentSize;
-        transform.Rotate(currentRotationSpeed * 360f * Time.deltaTime);
-    }
+        Vector3 currentSize = transform.localScale;
+        float xChange = Mathf.Sign(currentSize.x - scale.x);
+        float yChange = Mathf.Sign(currentSize.y - scale.y);
+        float zChange = Mathf.Sign(currentSize.z - scale.z);
 
-    public void Scale(float speed)
-    {
-        currentSize += new Vector3(speed * size.x, speed * size.y, speed * size.z) * Time.deltaTime;
-    }
-
-    public void ScaleTowardsTarget(float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
-        ScaleTowards(size, speed, ignoreX, ignoreY, ignoreZ);
-    }
-
-    public void ScaleTowardsTarget(float speed)
-    {
-        ScaleTowardsTarget(speed, false, false, false);
-    }
-
-    public void ScaleTowards(Vector3 scale, float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
         if(!ignoreX) 
         {
             if(currentSize.x < scale.x)
-            {
-                currentSize.x += speed * size.x * Time.deltaTime;
-            }
+                currentSize.x += speed * Time.deltaTime;
             else if(currentSize.x > scale.x)
-            {
-                currentSize.x -= speed * size.x * Time.deltaTime;
-            }
-            else
-            {
-                currentSize.x = scale.x;
-            }
+                currentSize.x -= speed * Time.deltaTime;
         }
 
         if(!ignoreY) 
         {
             if(currentSize.y < scale.y)
-            {
-                currentSize.y += speed * size.y * Time.deltaTime;
-            }
-            else if(currentSize.y > size.y)
-            {
-                currentSize.y -= speed * size.y * Time.deltaTime;
-            }
-            else
-            {
-                currentSize.y = scale.y;
-            }
+                currentSize.y += speed * Time.deltaTime;
+            else if(currentSize.y > scale.y)
+                currentSize.y -= speed * Time.deltaTime;
         }
 
         if(!ignoreZ)
         {
             if(currentSize.z < scale.z)
-            {
-                currentSize.z += speed * size.z * Time.deltaTime;
-            }
+                currentSize.z += speed * Time.deltaTime;
             else if(currentSize.z > scale.z)
-            {
-                currentSize.z -= speed * size.z * Time.deltaTime;
-            }
-            else
-            {
-                currentSize.z = scale.z;
-            }
+                currentSize.z -= speed * Time.deltaTime;
         }
+
+        if(xChange != Mathf.Sign(currentSize.x - scale.x))
+            currentSize.x = scale.x;
+
+        if(yChange != Mathf.Sign(currentSize.y - scale.y))
+            currentSize.y = scale.y;
+
+        if(zChange != Mathf.Sign(currentSize.z - scale.z))
+            currentSize.z = scale.z;
+
+        transform.localScale = currentSize;
     }
 
-    public void ScaleTowards(Vector3 scale, float speed) 
+    public static void ScaleTowards(Transform transform, Vector3 scale, float speed) 
     {
-        ScaleTowards(scale, speed, false, false, false);
+        ScaleTowards(transform, scale, speed, false, false, false);
     }
 
-    public void AccelerateRotation(float speed)
+    public static void AccelerateRotationTowards(Rotator rotator, Vector3 rotation, float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
     {
-        currentRotationSpeed += new Vector3(speed * rotationSpeed.x, speed * rotationSpeed.y, speed * rotationSpeed.z) * Time.deltaTime;
-    }
+        Vector3 currentRotationSpeed = rotator.speed;
+        float xChange = Mathf.Sign(currentRotationSpeed.x - rotation.x);
+        float yChange = Mathf.Sign(currentRotationSpeed.y - rotation.y);
+        float zChange = Mathf.Sign(currentRotationSpeed.z - rotation.z);
 
-    public void AccelerateRotationTowards(Vector3 rotation, float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
         if(!ignoreX)
         { 
             if (currentRotationSpeed.x < rotation.x)
-            {
                 currentRotationSpeed.x += speed * rotation.x * Time.deltaTime;
-            }
             else if (currentRotationSpeed.x > rotation.x)
-            {
                 currentRotationSpeed.x -= speed * rotation.x * Time.deltaTime;
-            }
-            else
-            {
-                currentRotationSpeed.x = rotation.x;
-            }
         }
 
         if(!ignoreY) 
         {
             if (currentRotationSpeed.y < rotation.y)
-            {
                 currentRotationSpeed.y += speed * rotation.y * Time.deltaTime;
-            }
             else if (currentRotationSpeed.y > rotation.y)
-            {
                 currentRotationSpeed.y -= speed * rotation.y * Time.deltaTime;
-            }
-            else
-            {
-                currentRotationSpeed.y = rotation.y;
-            }
         }
 
         if(!ignoreZ) 
         {
             if (currentRotationSpeed.z < rotation.z)
-            {
                 currentRotationSpeed.z += speed * rotation.z * Time.deltaTime;
-            }
             else if (currentRotationSpeed.z > rotation.z)
-            {
                 currentRotationSpeed.z -= speed * rotation.z * Time.deltaTime;
-            }
-            else
-            {
-                currentRotationSpeed.z = rotation.z;
-            }
         }
-    }
-    
-    public void AccelerateRotationTowards(Vector3 rotation, float speed) 
-    {
-        AccelerateRotationTowards(rotation, speed, false, false, false);
-    }
 
-    public void AccelerateRotationTowardsTarget(float speed, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
-        AccelerateRotationTowards(rotationSpeed, speed, ignoreX, ignoreY, ignoreZ);
-    }
+        if(xChange != Mathf.Sign(currentRotationSpeed.x - rotation.x))
+            currentRotationSpeed.x = rotation.x;
 
-    public void AccelerateRotationTowardsTarget(float speed)
-    {
-        AccelerateRotationTowardsTarget(speed, false, false, false);
+        if(yChange != Mathf.Sign(currentRotationSpeed.y - rotation.y))
+            currentRotationSpeed.y = rotation.y;
+
+        if(zChange != Mathf.Sign(currentRotationSpeed.z - rotation.z))
+            currentRotationSpeed.z = rotation.z;
+
+        rotator.speed = currentRotationSpeed;
     }
 
-    public bool IsTooLarge(Vector3 desiredSize, bool ignoreX, bool ignoreY, bool ignoreZ)
+    public static void AccelerateRotationTowards(Rotator rotator, Vector3 rotation, float speed) 
     {
-        bool isTooLarge = false;
-        if(!ignoreX && currentSize.x > desiredSize.x) 
-            isTooLarge = true;
+        AccelerateRotationTowards(rotator, rotation, speed, false, false, false);
+    }
 
-        if(!ignoreY && currentSize.y > desiredSize.y) 
-            isTooLarge = true;
+    public static bool CheckSize(Transform transform, Vector3 scale, bool ignoreX, bool ignoreY, bool ignoreZ) {
+        bool isRightSize = true;
+        if(!ignoreX && transform.localScale.x != scale.x) 
+            isRightSize = false;
 
-        if(!ignoreZ && currentSize.z > desiredSize.z) 
-            isTooLarge = true;
+        if(!ignoreY && transform.localScale.y != scale.y) 
+            isRightSize = false;
+
+        if(!ignoreZ && transform.localScale.z != scale.z) 
+            isRightSize = false;
         
-        return isTooLarge;
+        return isRightSize;
     }
 
-    public bool IsTooLarge(Vector3 desiredSize) {
-        return IsTooLarge(desiredSize, false, false, false);
-    }
+    public static bool CheckRotation(Rotator rotator, Vector3 rotation, bool ignoreX, bool ignoreY, bool ignoreZ) {
+        bool isCorrectRotation = true;
+        if(!ignoreX && rotator.speed.x != rotation.x) 
+            isCorrectRotation = false;
 
-    public bool IsRotatingTooQuickly(Vector3 desiredRotation, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
-        bool isRotatingTooQuickly = false;
-        if(!ignoreX && currentRotationSpeed.x > desiredRotation.x) 
-            isRotatingTooQuickly = true;
+        if(!ignoreY && rotator.speed.y != rotation.y) 
+            isCorrectRotation = false;
 
-        if(!ignoreY && currentRotationSpeed.y > desiredRotation.y) 
-            isRotatingTooQuickly = true;
-
-        if(!ignoreZ && currentRotationSpeed.z > desiredRotation.z) 
-            isRotatingTooQuickly = true;
+        if(!ignoreZ && rotator.speed.z != rotation.z) 
+            isCorrectRotation = false;
         
-        return isRotatingTooQuickly;
-    }
-
-    public bool IsTooSmall(Vector3 desiredSize, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
-        bool isTooSmall = false;
-        if(!ignoreX && currentSize.x < desiredSize.x) 
-            isTooSmall = true;
-
-        if(!ignoreY && currentSize.y < desiredSize.y) 
-            isTooSmall = true;
-
-        if(!ignoreZ && currentSize.z < desiredSize.z) 
-            isTooSmall = true;
-        
-        return isTooSmall;
-    }
-
-    public bool IsRotatingTooSlowly(Vector3 desiredRotation, bool ignoreX, bool ignoreY, bool ignoreZ)
-    {
-        bool isRotatingTooSlowly = false;
-        if(!ignoreX && currentRotationSpeed.x < desiredRotation.x) 
-            isRotatingTooSlowly = true;
-
-        if(!ignoreY && currentRotationSpeed.y < desiredRotation.y) 
-            isRotatingTooSlowly = true;
-
-        if(!ignoreZ && currentRotationSpeed.z < desiredRotation.z) 
-            isRotatingTooSlowly = true;
-        
-        return isRotatingTooSlowly;
+        return isCorrectRotation;
     }
 }

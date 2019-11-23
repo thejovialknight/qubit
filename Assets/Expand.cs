@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Expand : StateMachineBehaviour
 {
-    public float scaleSpeed = 1f;
+    Vector3 size;
+    public Vector3 rotationSpeed;
     public float scaleAcceleration = 10f;
     public float rotationAcceleration = 10f;
     public bool lockXScale = false;
@@ -16,7 +17,7 @@ public class Expand : StateMachineBehaviour
 
     float currentScaleSpeed;
 
-    AnimationHelper animationHelper;
+    Rotator rotator;
     GameObject gameObject;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -28,33 +29,35 @@ public class Expand : StateMachineBehaviour
         animator.SetBool("Shrinking", false);
         gameObject = animator.gameObject;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
-        animationHelper = gameObject.GetComponent<AnimationHelper>();
-        currentScaleSpeed = scaleSpeed;
+        rotator = gameObject.GetComponent<Rotator>();
+        currentScaleSpeed = 0f;
+        size = new Vector3(animator.GetFloat("xScale"), animator.GetFloat("yScale"), animator.GetFloat("zScale"));
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(animationHelper.IsRotatingTooSlowly(animationHelper.rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
+        if(!AnimationHelper.CheckRotation(rotator, rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
         {
-            animationHelper.AccelerateRotationTowardsTarget(rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
+            AnimationHelper.AccelerateRotationTowards(rotator, rotationSpeed, rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
         }
         else
         {
-            animationHelper.currentRotationSpeed = animationHelper.rotationSpeed;
+            rotator.speed = rotationSpeed;
         }
 
-        if(animationHelper.IsTooSmall(animationHelper.size, lockXScale, lockYScale, lockZScale))
+        if(!AnimationHelper.CheckSize(gameObject.transform, size, lockXScale, lockYScale, lockZScale))
         {
-            animationHelper.ScaleTowardsTarget(currentScaleSpeed, lockXScale, lockYScale, lockZScale);
+            AnimationHelper.ScaleTowards(gameObject.transform, size, currentScaleSpeed, lockXScale, lockYScale, lockZScale);
             currentScaleSpeed += scaleAcceleration;
         }
         else
         {
-            animationHelper.currentSize = animationHelper.size;
+            gameObject.transform.localScale = size;
         }
 
-        if(!animationHelper.IsTooSmall(animationHelper.size, lockXScale, lockYScale, lockZScale) && !animationHelper.IsRotatingTooSlowly(animationHelper.rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
+        if(AnimationHelper.CheckSize(gameObject.transform, size, lockXScale, lockYScale, lockZScale) 
+            && AnimationHelper.CheckRotation(rotator, rotationSpeed, lockXRotation, lockYRotation, lockZRotation))
         {
             animator.SetBool("Expanding", false);
             animator.SetBool("Expanded", true);

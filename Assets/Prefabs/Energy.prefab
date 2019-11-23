@@ -12,11 +12,8 @@ GameObject:
   - component: {fileID: 5151646576853173306}
   - component: {fileID: 5151646576853173307}
   - component: {fileID: 5151646576853173252}
-  - component: {fileID: 5151646576853173253}
-  - component: {fileID: 5151646576853173254}
   - component: {fileID: 5151646576853173255}
   - component: {fileID: 5151646576853173248}
-  - component: {fileID: 3259757264764290412}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
@@ -99,43 +96,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5151646576853173253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5151646576853173250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc04484713fe484e8ce84f756f2ea96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  rotation: {x: 1, y: 1, z: 1}
---- !u!114 &5151646576853173254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5151646576853173250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0de347ca4c841ca46a6d80ce57169df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: {x: 1, y: 1, z: 1}
-  scale: {x: 0.5, y: 0.25, z: 0.5}
-  shrunkRotationSpeed: {x: 20, y: 20, z: 20}
-  shrinkSpeed: 1
-  scaleAcceleration: 10
-  rotationAcceleration: 10
-  expansionTime: 1
-  startsExpanded: 1
-  immediateChange: 0
-  isShrunk: 0
-  isExpanded: 0
 --- !u!114 &5151646576853173255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,15 +124,3 @@ MonoBehaviour:
   valueMin: 3
   valueMax: 8
   value: 0
---- !u!114 &3259757264764290412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5151646576853173250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a003c0b4e9c829c46bab83ac9e95c20f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

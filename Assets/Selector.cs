@@ -6,19 +6,21 @@ public class Selector : MonoBehaviour
 {
     public Transform selected;
     float yOffset;
+    float size;
 
-    AnimationHelper animationHelper;
     Animator animator;
 
     public void Initialize(Transform selected, float size, float yOffset) {
         this.selected = selected;
         this.yOffset = yOffset;
-        animationHelper.size = new Vector3(size, 0.05f, size);
+        this.size = size;
+        animator.SetFloat("xScale", size);
+        animator.SetFloat("yScale", 0.05f);
+        animator.SetFloat("zScale", size);
     }
 
     void Awake() 
     {
-        animationHelper = GetComponent<AnimationHelper>();
         animator = GetComponent<Animator>();
     }
 

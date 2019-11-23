@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shrinker : MonoBehaviour
 {
     MeshRenderer meshRenderer;
-    AnimationHelper rotationScript;
     public Vector3 rotationSpeed;
     public Vector3 scale;
     public Vector3 shrunkRotationSpeed;
@@ -24,7 +23,6 @@ public class Shrinker : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        rotationScript = GetComponent<AnimationHelper>();
 
         if (startsExpanded)
         {
@@ -62,13 +60,11 @@ public class Shrinker : MonoBehaviour
         {
             transform.localScale = Vector3.Lerp(previousScale, scale, expansionTime * Time.deltaTime);
             //rotationScript.rotation = Vector3.Lerp(previousRotationSpeed, rotationSpeed, expansionTime * Time.deltaTime);
-            Debug.Log("EXPANDING");
             yield return null;
         }
 
         transform.localScale = scale;
         //rotationScript.rotation = rotationSpeed;
-        Debug.Log("EXPANDED");
         isExpanded = true;
         isShrunk = false;
     }

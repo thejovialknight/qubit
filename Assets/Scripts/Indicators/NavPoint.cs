@@ -46,6 +46,7 @@ public class NavPoint : MonoBehaviour
     void Start()
     {
         transform.position = transform.position + offset;
+        animator.SetFloat("yScale", 0.05f);
     }
 
     void Update()

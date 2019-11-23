@@ -37,9 +37,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e525db5c2a1604e82f433800da19bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSpeed: 1
+  rotationSpeed: {x: 0, y: 1, z: 0}
   scaleAcceleration: 1
-  rotationAcceleration: 1
+  rotationAcceleration: 2
   lockXScale: 0
   lockYScale: 0
   lockZScale: 0
@@ -58,7 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fa7ad4c55803b4fbbb63cdcc08f0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationHelper: {fileID: 0}
+  speed: {x: 1, y: 1, z: 1}
+  ignoreX: 0
+  ignoreY: 0
+  ignoreZ: 0
 --- !u!1102 &-5082222898867670351
 AnimatorState:
   serializedVersion: 5
@@ -126,9 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf468ad849dec644a4d272d4acd7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSpeed: 1
-  scaleAcceleration: 1
-  rotationAcceleration: 1
+  scaleAcceleration: 15
+  rotationAcceleration: 0.1
   lockXScale: 0
   lockYScale: 1
   lockZScale: 0
@@ -202,9 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf468ad849dec644a4d272d4acd7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSpeed: 1
-  scaleAcceleration: 1
-  rotationAcceleration: 1
+  scaleAcceleration: 15
+  rotationAcceleration: 0.1
   lockXScale: 0
   lockYScale: 1
   lockZScale: 0
@@ -231,7 +232,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -250,31 +251,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Expanded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Shrinking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Shrunk
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Destroy
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: xScale
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: yScale
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: zScale
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

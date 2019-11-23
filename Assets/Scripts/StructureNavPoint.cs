@@ -8,9 +8,17 @@ public class StructureNavPoint : MonoBehaviour
     public NavPoint navPoint;
     public GameObject structure;
 
-    void Start()
+    Animator animator;
+
+    void Awake()
     {
         navPoint = GetComponent<NavPoint>();
+        animator = GetComponent<Animator>();
+    }
+
+    void Start() {
+        animator.SetFloat("xScale", 5f);
+        animator.SetFloat("zScale", 5f);
     }
 
     void Update()

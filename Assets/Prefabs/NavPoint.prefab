@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1649443239445225493}
   - component: {fileID: 1649443239445225492}
   - component: {fileID: 1649443239445225495}
-  - component: {fileID: 1649443239445225490}
+  - component: {fileID: 6329885282354044005}
   - component: {fileID: 1649443239445225491}
   - component: {fileID: -3472656103938763016}
   m_Layer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1649443239445225497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0.05, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1649443239445225490
+--- !u!114 &6329885282354044005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,13 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1649443239445225497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc04484713fe484e8ce84f756f2ea96, type: 3}
+  m_Script: {fileID: 11500000, guid: 40778823be81d5743b0ce8d4d05bebda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRotationSpeed: {x: 0, y: 0, z: 0}
-  currentSize: {x: 0, y: 0, z: 0}
-  rotationSpeed: {x: 0, y: 1, z: 0}
-  size: {x: 1, y: 0.05, z: 1}
+  speed: {x: 0, y: 0, z: 0}
 --- !u!114 &1649443239445225491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0.25, z: 0}
   agent: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!95 &-3472656103938763016
 Animator:
   serializedVersion: 3

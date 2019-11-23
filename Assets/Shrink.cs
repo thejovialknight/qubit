@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shrink : StateMachineBehaviour
 {
-    public float scaleSpeed = 1f;
     public float scaleAcceleration = 10f;
     public float rotationAcceleration = 10f;
     public bool lockXScale = false;
@@ -16,7 +15,7 @@ public class Shrink : StateMachineBehaviour
 
     float currentScaleSpeed;
 
-    AnimationHelper animationHelper;
+    Rotator rotator;
     GameObject gameObject;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -27,24 +26,24 @@ public class Shrink : StateMachineBehaviour
         animator.SetBool("Expanding", false);
         animator.SetBool("Shrinking", true);
         gameObject = animator.gameObject;
-        animationHelper = gameObject.GetComponent<AnimationHelper>();
-        currentScaleSpeed = scaleSpeed;
+        rotator = gameObject.GetComponent<Rotator>();
+        currentScaleSpeed = 0f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animationHelper.IsTooLarge(Vector3.zero, lockXScale, lockYScale, lockZScale))
+        if (!AnimationHelper.CheckSize(gameObject.transform, Vector3.zero, lockXScale, lockYScale, lockZScale))
         {
-            animationHelper.AccelerateRotationTowards(new Vector3(25f, 25f, 25f), rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
-            animationHelper.ScaleTowards(Vector3.zero, currentScaleSpeed, lockXScale, lockYScale, lockZScale);
+            AnimationHelper.AccelerateRotationTowards(rotator, new Vector3(500f, 500f, 500f), rotationAcceleration, lockXRotation, lockYRotation, lockZRotation);
+            AnimationHelper.ScaleTowards(gameObject.transform, Vector3.zero, currentScaleSpeed, lockXScale, lockYScale, lockZScale);
             currentScaleSpeed += scaleAcceleration * Time.deltaTime;
         }
         else
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            animationHelper.currentSize = Vector3.zero;
-            animationHelper.currentRotationSpeed = Vector3.zero;
+            gameObject.transform.localScale = Vector3.zero;
+            rotator.speed = Vector3.zero;
             gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
             animator.SetBool("Shrinking", false);
             animator.SetBool("Shrunk", true);

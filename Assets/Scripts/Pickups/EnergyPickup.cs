@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnergyPickup : MonoBehaviour, IPickupable
 {
     PickupInfo info;
+    Animator animator;
+    public AudioClip pickupSound;
 
     public bool isActive = true;
     public bool IsActive
@@ -23,12 +25,14 @@ public class EnergyPickup : MonoBehaviour, IPickupable
     void Awake()
     {
         info = GetComponent<PickupInfo>();
+        animator = GetComponent<Animator>();
     }
 
     public void Pickup(GameObject bitbot)
     {
+        AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         bitbot.GetComponent<EnergyBank>().Deposit(info.value);
-        GetComponent<ShrinkAndDestroy>().StartCoroutine("Destroy");
+        animator.SetBool("Destroy", true);
         IsActive = false;
     }
 }
