@@ -7,6 +7,7 @@ public class SelectionController : MonoBehaviour
     GameObject selection = null;
 
     public Transform selectorPrefab;
+    public Transform currentSelection;
     public Selector currentSelector;
 
     void Update()
@@ -17,21 +18,23 @@ public class SelectionController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if(selection != null)
+                if (selection != null)
                 {
                     DeselectObject();
                 }
-
-                if (hit.collider.CompareTag("Bitbot"))
+                if(!GameObject.ReferenceEquals(hit.transform, currentSelection))
                 {
-                    SelectObject(hit.collider.gameObject, 1.5f, 0.25f);
+                    if (hit.collider.CompareTag("Bitbot"))
+                    {
+                        SelectObject(hit.collider.gameObject, 1.5f, 0.25f);
 
-                    // make bitbot do this when event is fired. In fact, this will allow the selector to be entirely programmatic
-                    selection.GetComponent<PlayerNavController>().enabled = true;
-                }
-                else if (hit.collider.CompareTag("Structure"))
-                {
-                    SelectObject(hit.collider.gameObject, 5f, 0.125f);
+                        // make bitbot do this when event is fired. In fact, this will allow the selector to be entirely programmatic
+                        selection.GetComponent<PlayerNavController>().enabled = true;
+                    }
+                    else if (hit.collider.CompareTag("Structure"))
+                    {
+                        SelectObject(hit.collider.gameObject, 5f, 0.125f);
+                    }
                 }
             }
         }
@@ -39,7 +42,8 @@ public class SelectionController : MonoBehaviour
 
     void SelectObject(GameObject obj, float selectorSize, float yOffset)
     {
-        currentSelector = GameObject.Instantiate(selectorPrefab).GetComponent<Selector>();
+        currentSelection = GameObject.Instantiate(selectorPrefab);
+        currentSelector = currentSelection.GetComponent<Selector>();
         currentSelector.Initialize(obj.transform, selectorSize, yOffset);
         selection = obj;
         EventManager.SelectEvent(selection);

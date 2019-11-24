@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5151646576853173252}
   - component: {fileID: 5151646576853173255}
   - component: {fileID: 5151646576853173248}
+  - component: {fileID: 986818311}
+  - component: {fileID: 986818312}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
@@ -108,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df086b9f3b28db43a8f3ddc14b7f6e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: {fileID: 8300000, guid: 0980a50d7d48d2a44a02a2928b0d5d2a, type: 3}
   isActive: 1
 --- !u!114 &5151646576853173248
 MonoBehaviour:
@@ -123,4 +126,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueMin: 3
   valueMax: 8
+  size: 0
   value: 0
+--- !u!95 &986818311
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5151646576853173250}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac04e3fa1b19cb945bafdb3366e03f6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &986818312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5151646576853173250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40778823be81d5743b0ce8d4d05bebda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: {x: 0, y: 0, z: 0}
