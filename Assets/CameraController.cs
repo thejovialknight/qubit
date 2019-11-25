@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public float moveSpeed;
     public float rotateSpeed;
 
+    public float angleDepth;
     public float zoomDistance;
     public float zoomSpeed;
     public float minZoom;
@@ -25,9 +26,9 @@ public class CameraController : MonoBehaviour
         zoomDistance -= scrollDirection * zoomSpeed * Time.deltaTime;
         zoomDistance = Mathf.Clamp(zoomDistance, minZoom, maxZoom);
 
-        transform.Rotate(new Vector3(-45, 0, 0));
+        transform.Rotate(new Vector3(-angleDepth, 0, 0));
         transform.Translate(new Vector3(horizontalMovement * moveSpeed * Time.deltaTime, 0, forwardMovement * moveSpeed * Time.deltaTime));
-        transform.Rotate(new Vector3(45, 0, 0));
+        transform.Rotate(new Vector3(angleDepth, 0, 0));
 
         Ray ray = new Ray(transform.position, transform.forward);
         LayerMask mask = LayerMask.GetMask("Ground");
