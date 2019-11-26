@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public delegate void OnSelectEvent(GameObject selection);
-
+    public delegate void OnSelectEvent(GameObject[] objects);
     public static event OnSelectEvent onSelectEvent;
-    public static void SelectEvent(GameObject selection)
+    public static void SelectEvent(GameObject[] objects)
     {
         if (onSelectEvent != null)
         {
-            onSelectEvent(selection);
+            onSelectEvent(objects);
         }
     }
 
-    public static event OnSelectEvent onDeselectEvent;
-    public static void DeselectEvent(GameObject selection)
+    public delegate void OnDeselectEvent();
+    public static event OnDeselectEvent onDeselectEvent;
+    public static void DeselectEvent()
     {
         if (onDeselectEvent != null)
         {
-            onDeselectEvent(selection);
+            onDeselectEvent();
+        }
+    }
+
+    public delegate void OnInteractEvent(GameObject obj);
+    public static event OnInteractEvent onInteractEvent;
+    public static void InteractEvent(GameObject obj)
+    {
+        if (onInteractEvent != null)
+        {
+            onInteractEvent(obj);
         }
     }
 }

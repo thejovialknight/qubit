@@ -22,15 +22,18 @@ public class NavPoint : MonoBehaviour
         EventManager.onDeselectEvent -= OnDeselect;
     }
 
-    void OnSelect(GameObject selection)
+    void OnSelect(GameObject[] objects)
     {
-        if(GameObject.ReferenceEquals(selection, agent.gameObject))
+        foreach (GameObject obj in objects)
         {
-            animator.SetBool("Expanding", true);
+            if (GameObject.ReferenceEquals(obj, agent.gameObject))
+            {
+                animator.SetBool("Expanding", true);
+            }
         }
     }
 
-    void OnDeselect(GameObject selection)
+    void OnDeselect()
     {
         if(GameObject.ReferenceEquals(selection, agent.gameObject))
         {
