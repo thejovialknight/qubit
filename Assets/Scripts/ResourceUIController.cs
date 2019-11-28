@@ -19,13 +19,15 @@ public class ResourceUIController : MonoBehaviour
         EventManager.onDeselectEvent -= OnDeselected;
     }
 
-    void OnSelected(GameObject selection)
+    void OnSelected(GameObject[] selection)
     {
+        /*
         bitBank = selection.GetComponent<BitBank>();
         energyBank = selection.GetComponent<EnergyBank>();
+        */
     }
 
-    void OnDeselected(GameObject selection)
+    void OnDeselected()
     {
         bitBank = null;
         energyBank = null;

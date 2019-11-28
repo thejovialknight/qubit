@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBankStructure : MonoBehaviour, IInteractable
+public class BitBankStructure : MonoBehaviour, IInteractable
 {
-    public EnergyBank bank;
+    public BitBank bank;
     public bool selected;
 
     void OnEnable()
@@ -37,10 +37,10 @@ public class EnergyBankStructure : MonoBehaviour, IInteractable
 
     public void Interact(GameObject bitbot)
     {
-        EnergyBank botBank = bitbot.GetComponent<EnergyBank>();
-        if(botBank.energy > 0)
+        BitBank botBank = bitbot.GetComponent<BitBank>();
+        if(botBank.bits > 0)
         {
-            EnergyBank.Transfer(botBank, bank, botBank.energy);
+            BitBank.Transfer(botBank, bank, botBank.bits);
         }
     }
 }

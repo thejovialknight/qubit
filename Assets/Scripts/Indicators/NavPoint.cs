@@ -35,10 +35,7 @@ public class NavPoint : MonoBehaviour
 
     void OnDeselect()
     {
-        if(GameObject.ReferenceEquals(selection, agent.gameObject))
-        {
-            animator.SetBool("Shrinking", true);
-        }
+        animator.SetBool("Shrinking", true);
     }
 
     void Awake()

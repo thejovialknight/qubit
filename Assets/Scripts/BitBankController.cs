@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryBankController : MonoBehaviour
+public class BitBankController : MonoBehaviour
 {
     public BitBank bank;
     public CellController spireCell;

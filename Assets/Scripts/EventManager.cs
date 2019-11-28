@@ -33,4 +33,14 @@ public class EventManager : MonoBehaviour
             onInteractEvent(obj);
         }
     }
+
+    public delegate void OnControlEvent(RaycastHit hit);
+    public static event OnControlEvent onControlEvent;
+    public static void ControlEvent(RaycastHit hit)
+    {
+        if (onControlEvent != null)
+        {
+            onControlEvent(hit);
+        }
+    }
 }

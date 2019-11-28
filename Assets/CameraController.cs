@@ -18,20 +18,19 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        float forwardMovement = Input.GetAxisRaw("Vertical");
-        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        Vector3 movementSpeed = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         float rotationalMovement = Input.GetAxisRaw("Rotate");
         float scrollDirection = Input.GetAxis("Mouse ScrollWheel");
 
-        zoomDistance -= scrollDirection * zoomSpeed * Time.deltaTime;
+        zoomDistance -= scrollDirection * zoomSpeed;
         zoomDistance = Mathf.Clamp(zoomDistance, minZoom, maxZoom);
 
         transform.Rotate(new Vector3(-angleDepth, 0, 0));
-        transform.Translate(new Vector3(horizontalMovement * moveSpeed * Time.deltaTime, 0, forwardMovement * moveSpeed * Time.deltaTime));
+        transform.Translate(movementSpeed * moveSpeed * (zoomDistance / 2) * Time.deltaTime);
         transform.Rotate(new Vector3(angleDepth, 0, 0));
 
         Ray ray = new Ray(transform.position, transform.forward);
-        LayerMask mask = LayerMask.GetMask("Ground");
+        LayerMask mask = LayerMask.GetMask("Terrain");
         if (Physics.Raycast(ray, out RaycastHit hit, 500, mask))
         {
             pivotPoint = hit.point;
