@@ -1561,7 +1561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &209068591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6120,7 +6120,7 @@ MonoBehaviour:
   zoomDistance: 20
   zoomSpeed: 20
   minZoom: 7.5
-  maxZoom: 50
+  maxZoom: 75
   pivotPoint: {x: 0, y: 0, z: 0}
   listener: {fileID: 1210072998}
 --- !u!1 &976316760
