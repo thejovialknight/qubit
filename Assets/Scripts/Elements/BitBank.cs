@@ -7,6 +7,15 @@ public class BitBank : MonoBehaviour
     public int bits;
     public int maxBits;
 
+    public bool Full()
+    {
+        if(bits < maxBits)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public void Deposit(int amount)
     {
         bits += amount;
@@ -28,5 +37,10 @@ public class BitBank : MonoBehaviour
         {
             Debug.Log("Sender doesn't have enough money for transfer!");
         }
+    }
+
+    public static void TransferClamped(BitBank sender, BitBank reciever, int amount, int min, int max)
+    {
+        Transfer(sender, reciever, Mathf.Clamp(amount, min, max));
     }
 }

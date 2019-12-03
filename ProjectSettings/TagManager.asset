@@ -9,6 +9,7 @@ TagManager:
   - Bitbot
   - Terrain
   - Selectable
+  - Blueprint
   layers:
   - Default
   - TransparentFX

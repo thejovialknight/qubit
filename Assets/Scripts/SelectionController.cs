@@ -17,7 +17,6 @@ public class SelectionController : MonoBehaviour
 
     void Update()
     {
-
         // this is broken fix later
         Ray ray = cam.ScreenPointToRay(new Vector3(Input.mousePosition.x / ((float)Screen.width / (float)renderTexture.width), Input.mousePosition.y / ((float)Screen.height / (float)renderTexture.height), 0));
         if (Physics.Raycast(ray, out RaycastHit hit))

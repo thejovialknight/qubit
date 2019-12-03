@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CellController : MonoBehaviour
 {
-    Renderer renderer;
+    Renderer render;
     Material material;
 
     public Vector4 materialColor;
@@ -17,8 +17,8 @@ public class CellController : MonoBehaviour
 
     void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        material = renderer.material;
+        render = GetComponent<Renderer>();
+        material = render.material;
         currentLuminosity = 0;
         desiredLuminosity = 0;
     }
@@ -36,7 +36,7 @@ public class CellController : MonoBehaviour
     void Update()
     {
         currentLuminosity = Mathf.Lerp(currentLuminosity, desiredLuminosity, luminositySpeed * Time.deltaTime);
-        Color c = GetComponent<Renderer>().material.color;
+        Color c = render.material.color;
         material.SetColor("_EmissionColor", new Vector4(c.r, c.g, c.b,0) * currentLuminosity);
     }
 }

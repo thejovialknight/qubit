@@ -8,6 +8,10 @@ public class CommandCenterStructure : MonoBehaviour, IInteractable
     public EnergyBank energyBank;
     public bool selected;
 
+    public CellController bitCell;
+    public CellController energyCell;
+    public CellController botCell;
+
     void OnEnable()
     {
         EventManager.onSelectEvent += OnSelect;
@@ -36,18 +40,29 @@ public class CommandCenterStructure : MonoBehaviour, IInteractable
         selected = false;
     }
 
+    void Update()
+    {
+        bitCell.TurnOff();
+        energyCell.TurnOff();
+        botCell.TurnOff();
+
+        if (bitBank.Full())
+        {
+            bitCell.TurnOn();
+        }
+
+        if (energyBank.Full())
+        {
+            energyCell.TurnOn();
+        }
+    }
+
     public void Interact(GameObject bitbot)
     {
         EnergyBank botEnergyBank = bitbot.GetComponent<EnergyBank>();
-        if (botEnergyBank.energy > 0)
-        {
-            EnergyBank.Transfer(botEnergyBank, energyBank, botEnergyBank.energy);
-        }
+        EnergyBank.TransferClamped(botEnergyBank, energyBank, botEnergyBank.energy, 0, energyBank.maxEnergy - energyBank.energy);
 
         BitBank botBitBank = bitbot.GetComponent<BitBank>();
-        if (botBitBank.bits > 0)
-        {
-            BitBank.Transfer(botBitBank, bitBank, botBitBank.bits);
-        }
+        BitBank.TransferClamped(botBitBank, bitBank, botBitBank.bits, 0, bitBank.maxBits - bitBank.bits);
     }
 }

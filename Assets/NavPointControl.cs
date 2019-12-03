@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class NavPointControl : MonoBehaviour
 {
     public Transform navPointPrefab;
-    public Transform interactNavPointPrefab;
     public NavPoint currentNavPoint;
 
     NavMeshAgent agent;

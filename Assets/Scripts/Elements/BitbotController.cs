@@ -9,6 +9,7 @@ public class BitbotController : MonoBehaviour
 
     public Transform navPointPrefab;
     public Transform structureNavPointPrefab;
+    public Transform buildNavPointPrefab;
     public NavPoint currentNavPoint;
 
     NavMeshAgent agent;
@@ -65,6 +66,13 @@ public class BitbotController : MonoBehaviour
                 agent.SetDestination(hit.collider.ClosestPoint(gameObject.transform.position));
                 Transform navPoint = navPointControl.CreateNavPoint(hit, hit.transform.position, structureNavPointPrefab);
                 navPoint.GetComponent<StructureNavPoint>().structure = hit.collider.gameObject;
+            }
+
+            if (hit.collider.tag == "Blueprint")
+            {
+                agent.SetDestination(hit.collider.ClosestPoint(gameObject.transform.position));
+                Transform navPoint = navPointControl.CreateNavPoint(hit, hit.transform.position, buildNavPointPrefab);
+                navPoint.GetComponent<BuildNavPoint>().structure = hit.collider.gameObject;
             }
         }
     }
