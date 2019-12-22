@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
     public float maxZoom;
 
     public Vector3 pivotPoint;
-    public Transform listener;
 
     void Update()
     {
@@ -34,7 +33,6 @@ public class CameraController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 500, mask))
         {
             pivotPoint = hit.point;
-            listener.position = hit.point;
             transform.position = hit.point;
             transform.Translate(new Vector3(0, 0, -zoomDistance));
         }

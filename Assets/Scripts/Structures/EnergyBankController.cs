@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnergyBankController : MonoBehaviour
 {
-    // make number gradually change so cells light up from bottom to top
+    float count = 0;
 
     public EnergyBank bank;
+    public int energyCount;
+    public float countSpeed = 0.05f;
 
     public List<EnergyBankCellFace> cellFaces = new List<EnergyBankCellFace>();
     public CellController spireCell;
@@ -16,13 +18,29 @@ public class EnergyBankController : MonoBehaviour
 
     void Update()
     {
-        foreach(EnergyBankCellFace cellFace in cellFaces)
+        count -= Time.deltaTime;
+        if(count < 0)
+        {
+            if(energyCount < bank.energy)
+            {
+                energyCount += 1;
+            }
+
+            if (energyCount > bank.energy)
+            {
+                energyCount -= 1;
+            }
+
+            count = countSpeed;
+        }
+
+        foreach (EnergyBankCellFace cellFace in cellFaces)
         {
             cellFace.TurnOffCells();
             spireCell.TurnOff();
         }
 
-        if (bank.energy > 0)
+        if (energyCount > 0)
         {
             foreach (EnergyBankCellFace cellFace in cellFaces)
             {
@@ -30,7 +48,7 @@ public class EnergyBankController : MonoBehaviour
             }
         }
 
-        if (bank.energy >= bank.maxEnergy * cell2Threshold)
+        if (energyCount >= bank.maxEnergy * cell2Threshold)
         {
             foreach (EnergyBankCellFace cellFace in cellFaces)
             {
@@ -38,7 +56,7 @@ public class EnergyBankController : MonoBehaviour
             }
         }
 
-        if (bank.energy >= bank.maxEnergy * cell3Threshold)
+        if (energyCount >= bank.maxEnergy * cell3Threshold)
         {
             foreach (EnergyBankCellFace cellFace in cellFaces)
             {
@@ -46,7 +64,7 @@ public class EnergyBankController : MonoBehaviour
             }
         }
 
-        if (bank.energy >= bank.maxEnergy)
+        if (energyCount >= bank.maxEnergy)
         {
             spireCell.TurnOn();
         }
